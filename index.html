@@ -1,0 +1,89 @@
+<script>
+
+let slides=document.querySelectorAll(".slide")
+let current=0
+
+function show(n){
+slides[current].classList.remove("active")
+current=n
+slides[current].classList.add("active")
+}
+
+function next(){
+if(current<slides.length-1){
+show(current+1)
+}
+}
+
+function back(){
+if(current>0){
+show(current-1)
+}
+}
+
+
+/* CHECK ANSWERS */
+
+document.querySelectorAll("input").forEach(input=>{
+
+function check(){
+
+let correct=input.getAttribute("data")
+let value=input.value.trim().toLowerCase()
+
+if(value==="") return
+
+if(value===correct){
+
+input.classList.remove("wrong")
+input.classList.add("correct")
+
+}else{
+
+input.classList.remove("correct")
+input.classList.add("wrong")
+
+}
+
+}
+
+input.addEventListener("input",check)
+input.addEventListener("blur",check)
+
+})
+
+
+
+/* AUTO NEXT FOR QUESTION SCREENS */
+
+document.querySelectorAll(".slide").forEach(slide=>{
+
+let qs=slide.querySelectorAll(".q")
+
+if(qs.length===0) return
+
+qs.forEach(input=>{
+
+input.addEventListener("input",()=>{
+
+let correct=true
+
+qs.forEach(q=>{
+
+if(q.value.trim().toLowerCase()!=q.getAttribute("data")){
+correct=false
+}
+
+})
+
+if(correct){
+setTimeout(next,700)
+}
+
+})
+
+})
+
+})
+
+</script>
