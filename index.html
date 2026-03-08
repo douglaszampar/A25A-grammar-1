@@ -1,39 +1,390 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Comparative Adjectives</title>
+
+<style>
+
+:root{
+--primary:#0E1D2E;
+--accent:#FF6400;
+--correct:#22c55e;
+--wrong:#ef4444;
+--bg:#f4f6fb;
+}
+
+body{
+margin:0;
+font-family:Arial, Helvetica, sans-serif;
+background:var(--bg);
+}
+
+.container{
+max-width:950px;
+margin:auto;
+padding:20px;
+}
+
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:20px;
+}
+
+.progress{
+height:8px;
+background:#ddd;
+border-radius:10px;
+overflow:hidden;
+}
+
+.progress-bar{
+height:8px;
+background:var(--accent);
+width:0%;
+}
+
+.score{
+font-weight:bold;
+color:var(--primary);
+}
+
+.slide{
+display:none;
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.12);
+}
+
+.slide.active{
+display:block;
+}
+
+h1,h2{
+color:var(--primary);
+}
+
+.words{
+font-weight:bold;
+margin:20px 0;
+}
+
+input{
+border:none;
+border-bottom:3px solid #444;
+font-size:18px;
+text-align:center;
+width:150px;
+margin:0 5px;
+padding:5px;
+outline:none;
+}
+
+.correct{
+border-bottom:4px solid var(--correct);
+background:#ecfdf5;
+}
+
+.wrong{
+border-bottom:4px solid var(--wrong);
+background:#fef2f2;
+}
+
+.buttons{
+margin-top:40px;
+display:flex;
+justify-content:space-between;
+gap:10px;
+}
+
+button{
+padding:10px 20px;
+font-size:16px;
+border:none;
+border-radius:6px;
+background:var(--primary);
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:var(--accent);
+}
+
+.drag{
+display:inline-block;
+background:#e5e7eb;
+padding:10px 18px;
+border-radius:6px;
+margin:10px;
+cursor:grab;
+}
+
+.drop{
+border:2px dashed #aaa;
+min-height:60px;
+padding:15px;
+margin:10px 0;
+border-radius:6px;
+}
+
+.question{
+margin:20px 0;
+font-weight:bold;
+}
+
+@media (max-width:700px){
+
+.slide{padding:25px}
+
+input{width:110px}
+
+.buttons{flex-direction:column}
+
+button{width:100%}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+<div class="score">Score: <span id="score">0</span></div>
+<div style="width:60%">
+<div class="progress">
+<div class="progress-bar" id="progress"></div>
+</div>
+</div>
+</header>
+
+
+<!-- TITLE -->
+
+<div class="slide active">
+<h1>Comparative Adjectives</h1>
+<p>Complete the exercises and discuss the questions.</p>
+
+<div class="buttons">
+<button onclick="next()">Start</button>
+</div>
+</div>
+
+
+<!-- SET 1 EXERCISE -->
+
+<div class="slide">
+
+<h2>Complete the sentences</h2>
+
+<div class="words">weak | big | young | good</div>
+
+<p>This phone is <input data="better"> than yours.</p>
+<p>My cousin is <input data="younger"> than me.</p>
+<p>The team looks <input data="weaker"> this year.</p>
+
+<div class="buttons">
+<button onclick="back()">Back</button>
+<button onclick="next()">Next</button>
+</div>
+
+</div>
+
+
+<!-- SET 1 QUESTIONS -->
+
+<div class="slide">
+
+<h2>Complete the questions</h2>
+
+<p>Do you think life today is <input class="q" data="better"> than life 50 years ago?</p>
+
+<p>Do smartphones make our memory <input class="q" data="weaker"> ?</p>
+
+<div class="buttons">
+<button onclick="back()">Back</button>
+<button onclick="next()">Next</button>
+</div>
+
+</div>
+
+
+<!-- DRAG -->
+
+<div class="slide">
+
+<h2>Who answers?</h2>
+
+<div class="drag" draggable="true" id="student">Student</div>
+<div class="drag" draggable="true" id="teacher">Teacher</div>
+
+<div class="question">
+1. Do you think life today is better than life 50 years ago?
+<div class="drop"></div>
+</div>
+
+<div class="question">
+2. Do smartphones make our memory weaker?
+<div class="drop"></div>
+</div>
+
+<div class="buttons">
+<button onclick="back()">Back</button>
+<button onclick="next()">Next</button>
+</div>
+
+</div>
+
+
+<!-- DISCUSSION -->
+
+<div class="slide">
+
+<h2>Discussion</h2>
+
+<p><b>Do you think life today is better than life 50 years ago?</b></p>
+
+<p>What things are better today?</p>
+<p>What things were better in the past?</p>
+
+<div class="buttons">
+<button onclick="back()">Back</button>
+<button onclick="next()">Next</button>
+</div>
+
+</div>
+
+
+<!-- SET 2 -->
+
+<div class="slide">
+
+<h2>Complete the sentences</h2>
+
+<div class="words">fast | easy | expensive | long</div>
+
+<p>The train is <input data="faster"> than the bus.</p>
+<p>This exercise is <input data="easier"> than the last one.</p>
+<p>This restaurant is <input data="more expensive"> than the café.</p>
+
+<div class="buttons">
+<button onclick="back()">Back</button>
+<button onclick="next()">Next</button>
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<h2>Discussion</h2>
+
+<p><b>Is it easier to learn English today than in the past?</b></p>
+
+<p>Why?</p>
+<p>What is difficult about learning languages?</p>
+
+<div class="buttons">
+<button onclick="back()">Back</button>
+<button onclick="next()">Next</button>
+</div>
+
+</div>
+
+
+<!-- SET 3 -->
+
+<div class="slide">
+
+<h2>Complete the sentences</h2>
+
+<div class="words">old | happy | strong | small</div>
+
+<p>My father is <input data="older"> than my mother.</p>
+<p>She feels <input data="happier"> in her new job.</p>
+<p>This athlete is <input data="stronger"> than the others.</p>
+
+<div class="buttons">
+<button onclick="back()">Back</button>
+<button onclick="next()">Next</button>
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<h2>Discussion</h2>
+
+<p><b>Are athletes stronger today than in the past?</b></p>
+
+<p>Why?</p>
+<p>How has training changed?</p>
+
+<div class="buttons">
+<button onclick="back()">Back</button>
+</div>
+
+</div>
+
+</div>
+
+
 <script>
 
 let slides=document.querySelectorAll(".slide")
 let current=0
+let score=0
+
+function updateProgress(){
+let p=(current/(slides.length-1))*100
+document.getElementById("progress").style.width=p+"%"
+}
 
 function show(n){
 slides[current].classList.remove("active")
 current=n
 slides[current].classList.add("active")
+updateProgress()
 }
 
 function next(){
-if(current<slides.length-1){
-show(current+1)
-}
+if(current<slides.length-1)show(current+1)
 }
 
 function back(){
-if(current>0){
-show(current-1)
-}
+if(current>0)show(current-1)
 }
 
-
-/* CHECK ANSWERS */
+document.addEventListener("keydown",e=>{
+if(e.key==="Enter")next()
+})
 
 document.querySelectorAll("input").forEach(input=>{
 
 function check(){
 
-let correct=input.getAttribute("data")
+let correct=input.dataset.answer || input.getAttribute("data")
 let value=input.value.trim().toLowerCase()
 
 if(value==="") return
 
 if(value===correct){
+
+if(!input.classList.contains("correct")){
+score++
+document.getElementById("score").textContent=score
+}
 
 input.classList.remove("wrong")
 input.classList.add("correct")
@@ -52,38 +403,10 @@ input.addEventListener("blur",check)
 
 })
 
-
-
-/* AUTO NEXT FOR QUESTION SCREENS */
-
-document.querySelectorAll(".slide").forEach(slide=>{
-
-let qs=slide.querySelectorAll(".q")
-
-if(qs.length===0) return
-
-qs.forEach(input=>{
-
-input.addEventListener("input",()=>{
-
-let correct=true
-
-qs.forEach(q=>{
-
-if(q.value.trim().toLowerCase()!=q.getAttribute("data")){
-correct=false
-}
-
-})
-
-if(correct){
-setTimeout(next,700)
-}
-
-})
-
-})
-
-})
+updateProgress()
 
 </script>
+
+</body>
+</html>
+```
